@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.banco.persistence.dao.impl.jdbc;
 
 import com.fpmislata.banco.business.domain.EntidadBancaria;
@@ -13,14 +9,13 @@ import java.sql.ResultSet;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alumno
- */
+
 public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
-
-    ConnectionFactory connectionFactory = new ConnectionFactoryImplDataSource();
+    
+    @Autowired
+    ConnectionFactory connectionFactory;
 
     @Override
     public EntidadBancaria get(int idEntidadBancaria) {

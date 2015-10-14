@@ -5,6 +5,11 @@
  */
 package com.fpmislata.banco.presentation;
 
+import com.fpmislata.banco.business.domain.EntidadBancaria;
+import com.fpmislata.banco.business.service.EntidadBancariaService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  *
  * @author alumno
@@ -15,8 +20,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        EntidadBancaria entidadbancaria1 = new EntidadBancaria();
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         
+//        EntidadBancariaService entidadBancariaService = context.getBean(EntidadBancariaService.class);
+//        EntidadBancaria entidadBancaria = entidadBancariaService.get(1);
+//        System.out.println(entidadBancaria.toString());
     }
-    
+
 }

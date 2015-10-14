@@ -9,7 +9,9 @@
   
     <context:annotation-config/>
   
-    <bean class="FQCN_DE_UNA_CLASE_JAVA_QUE_QUEREMOS_PODER_INYECTAR" />
+    <bean class="com.fpmislata.banco.persistence.dao.impl.jdbc.ConnectionFactoryImplDataSource" />
+    <bean class="com.fpmislata.banco.business.service.impl.EntidadBancariaServiceImpl" />
+    <bean class="com.fpmislata.banco.persistence.dao.impl.jdbc.EntidadBancariaDAOImpJDBC" />
  
  
 </beans>

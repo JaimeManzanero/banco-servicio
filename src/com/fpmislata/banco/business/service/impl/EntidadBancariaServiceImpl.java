@@ -10,19 +10,22 @@ import com.fpmislata.banco.business.service.EntidadBancariaService;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.banco.persistence.dao.impl.jdbc.EntidadBancariaDAOImpJDBC;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author alumno
  */
-public class EntidadBancariaServiceImpl implements EntidadBancariaService{
+public class EntidadBancariaServiceImpl implements EntidadBancariaService {
+    
+    @Autowired
+    EntidadBancariaDAO entidadBancariaDAO;
 
     @Override
     public EntidadBancaria get(int id) {
-        EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
-        
+
         EntidadBancaria entidadBancaria = entidadBancariaDAO.get(id);
-        
+
         return entidadBancaria;
     }
 
@@ -43,9 +46,8 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService{
 
     @Override
     public List<EntidadBancaria> findAll() {
-        EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
         List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
         return entidadesBancarias;
     }
-    
+
 }
