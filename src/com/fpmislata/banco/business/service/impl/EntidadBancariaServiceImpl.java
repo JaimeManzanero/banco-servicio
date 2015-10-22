@@ -12,10 +12,7 @@ import com.fpmislata.banco.persistence.dao.impl.jdbc.EntidadBancariaDAOImpJDBC;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author alumno
- */
+
 public class EntidadBancariaServiceImpl implements EntidadBancariaService {
     
     @Autowired
@@ -31,7 +28,7 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
 
     @Override
     public EntidadBancaria insert(EntidadBancaria t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entidadBancariaDAO.insert(t);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entidadBancariaDAO.delete(id);
     }
 
     @Override

@@ -67,17 +67,17 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
             preparedStatement.setString(5, entidadBancaria.getDireccion());
             preparedStatement.setString(6, entidadBancaria.getCIF());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+//            ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
-                entidadBancaria.setNombre(resultSet.getString("nombre"));
-                entidadBancaria.setCodigoEntidad(resultSet.getInt("codigoEntidad"));
-                java.util.Date utilDate = new java.util.Date(resultSet.getDate("fechaCreacion").getTime());
-                entidadBancaria.setFechaCreacion(utilDate);
-                entidadBancaria.setDireccion(resultSet.getString("direccion"));
-                entidadBancaria.setCIF(resultSet.getString("CIF"));
-            }
+//            if (resultSet.next()) {
+//                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
+//                entidadBancaria.setNombre(resultSet.getString("nombre"));
+//                entidadBancaria.setCodigoEntidad(resultSet.getInt("codigoEntidad"));
+//                java.util.Date utilDate = new java.util.Date(resultSet.getDate("fechaCreacion").getTime());
+//                entidadBancaria.setFechaCreacion(utilDate);
+//                entidadBancaria.setDireccion(resultSet.getString("direccion"));
+//                entidadBancaria.setCIF(resultSet.getString("CIF"));
+//            }
             connectionFactory.close(connection);
 
             int rowsInserted = preparedStatement.executeUpdate();
