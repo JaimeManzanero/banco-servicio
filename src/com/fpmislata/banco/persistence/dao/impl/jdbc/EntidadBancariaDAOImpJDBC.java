@@ -63,21 +63,12 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
             preparedStatement.setInt(1, entidadBancaria.getIdEntidadBancaria());
             preparedStatement.setString(2, entidadBancaria.getNombre());
             preparedStatement.setInt(3, entidadBancaria.getCodigoEntidad());
-            preparedStatement.setDate(4, (Date) entidadBancaria.getFechaCreacion());
+            java.sql.Date sqlDate = new java.sql.Date(entidadBancaria.getFechaCreacion().getTime());
+            preparedStatement.setDate(4, sqlDate);
             preparedStatement.setString(5, entidadBancaria.getDireccion());
             preparedStatement.setString(6, entidadBancaria.getCIF());
 
-//            ResultSet resultSet = preparedStatement.executeQuery();
-
-//            if (resultSet.next()) {
-//                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
-//                entidadBancaria.setNombre(resultSet.getString("nombre"));
-//                entidadBancaria.setCodigoEntidad(resultSet.getInt("codigoEntidad"));
-//                java.util.Date utilDate = new java.util.Date(resultSet.getDate("fechaCreacion").getTime());
-//                entidadBancaria.setFechaCreacion(utilDate);
-//                entidadBancaria.setDireccion(resultSet.getString("direccion"));
-//                entidadBancaria.setCIF(resultSet.getString("CIF"));
-//            }
+            
             connectionFactory.close(connection);
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -112,17 +103,7 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
             preparedStatement.setString(5, entidadBancaria.getCIF());
             preparedStatement.setInt(6, entidadBancaria.getIdEntidadBancaria());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
-                entidadBancaria.setNombre(resultSet.getString("nombre"));
-                entidadBancaria.setCodigoEntidad(resultSet.getInt("codigoEntidad"));
-                java.util.Date utilDate = new java.util.Date(resultSet.getDate("fechaCreacion").getTime());
-                entidadBancaria.setFechaCreacion(utilDate);
-                entidadBancaria.setDireccion(resultSet.getString("direccion"));
-                entidadBancaria.setCIF(resultSet.getString("CIF"));
-            }
+            
             connectionFactory.close(connection);
 
             int rowsChanged = preparedStatement.executeUpdate();
