@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,33 +56,38 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) {
 
         try {
-            String sql = "INSERT INTO entidadbancaria VALUES (?,?,?,?,?,?)";
+            int idEntidadBancaria;
+            String sql = "INSERT INTO entidadbancaria (nombre,codigoEntidad,fechaCreacion,direccion,CIF) VALUES (?,?,?,?,?)";
             Connection connection = connectionFactory.getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1, entidadBancaria.getIdEntidadBancaria());
-            preparedStatement.setString(2, entidadBancaria.getNombre());
-            preparedStatement.setInt(3, entidadBancaria.getCodigoEntidad());
-            java.sql.Date sqlDate = new java.sql.Date(entidadBancaria.getFechaCreacion().getTime());
-            preparedStatement.setDate(4, sqlDate);
-            preparedStatement.setString(5, entidadBancaria.getDireccion());
-            preparedStatement.setString(6, entidadBancaria.getCIF());
-
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            connectionFactory.close(connection);
+            preparedStatement.setString(1, entidadBancaria.getNombre());
+            preparedStatement.setInt(2, entidadBancaria.getCodigoEntidad());
+            java.sql.Date sqlDate = new java.sql.Date((new java.util.Date()).getTime());
+            preparedStatement.setDate(3, sqlDate);
+            preparedStatement.setString(4, entidadBancaria.getDireccion());
+            preparedStatement.setString(5, entidadBancaria.getCIF());
 
             int rowsInserted = preparedStatement.executeUpdate();
-
+            
             if (rowsInserted == 0) {
                 throw new RuntimeException("Ninguna fila insertada");
-            } else if (rowsInserted == 1) {
-                return entidadBancaria;
-            } else if (rowsInserted > 1) {
-                throw new RuntimeException("Demasiadas filas insertadas: " + rowsInserted);
-            } else {
-                throw new RuntimeException("Soy un paranoico: " + rowsInserted);
+            } else if (rowsInserted != 1) {
+                throw new RuntimeException("Demasiadas o pocas filas insertadas: " + rowsInserted);
             }
+            
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                idEntidadBancaria = generatedKeys.getInt(1);
+            } else {
+               throw new RuntimeException("No se ha encontrado de clave primaria"); 
+            }
+            connectionFactory.close(connection); 
+            entidadBancaria = this.get(idEntidadBancaria);
+           
+            return entidadBancaria;
+            
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
