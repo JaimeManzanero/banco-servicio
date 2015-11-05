@@ -97,32 +97,27 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
     public EntidadBancaria update(EntidadBancaria entidadBancaria) {
 
         try {
-            String sql = "UPDATE entidadbancaria SET nombre = ?, codigoEntidad = ?, fechaCreacion = ?, direccion = ?, CIF = ? WHERE idEntidadBancaria = ?";
+            String sql = "UPDATE entidadbancaria SET nombre = ?, codigoEntidad = ?, direccion = ?, CIF = ? WHERE idEntidadBancaria = ?";
             Connection connection = connectionFactory.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, entidadBancaria.getNombre());
             preparedStatement.setInt(2, entidadBancaria.getCodigoEntidad());
-            preparedStatement.setDate(3, (Date) entidadBancaria.getFechaCreacion());
-            preparedStatement.setString(4, entidadBancaria.getDireccion());
-            preparedStatement.setString(5, entidadBancaria.getCIF());
-            preparedStatement.setInt(6, entidadBancaria.getIdEntidadBancaria());
-
-            
-            connectionFactory.close(connection);
+            preparedStatement.setString(3, entidadBancaria.getDireccion());
+            preparedStatement.setString(4, entidadBancaria.getCIF());
+            preparedStatement.setInt(5, entidadBancaria.getIdEntidadBancaria());
 
             int rowsChanged = preparedStatement.executeUpdate();
 
             if (rowsChanged == 0) {
                 throw new RuntimeException("Ninguna fila cambiada");
-            } else if (rowsChanged == 1) {
-                return entidadBancaria;
-            } else if (rowsChanged > 1) {
+            } else if (rowsChanged != 1) {
                 throw new RuntimeException("Demasiadas filas cambiadas: " + rowsChanged);
-            } else {
-                throw new RuntimeException("Soy un paranoico: " + rowsChanged);
             }
+            
+            connectionFactory.close(connection);
+            return entidadBancaria;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
