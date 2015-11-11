@@ -12,5 +12,5 @@ import com.fpmislata.banco.business.domain.Usuario;
  * @author alumno
  */
 public interface Authorization {
-    boolean isAuthorizedURL(Usuario usuario, String url);
+    boolean isAuthorizedURL(Usuario usuario, String url, String metodo);
 }

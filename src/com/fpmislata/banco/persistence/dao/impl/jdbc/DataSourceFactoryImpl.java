@@ -5,8 +5,7 @@
  */
 package com.fpmislata.banco.persistence.dao.impl.jdbc;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

@@ -15,7 +15,7 @@ import com.fpmislata.banco.business.service.security.Authorization;
 public class AuthorizationImplDummy implements Authorization{
 
     @Override
-    public boolean isAuthorizedURL(Usuario usuario, String url) {
+    public boolean isAuthorizedURL(Usuario usuario, String url, String metodo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

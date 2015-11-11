@@ -6,6 +6,7 @@
 package com.fpmislata.banco.business.service.security.impl;
 
 import com.fpmislata.banco.business.service.security.PasswordManager;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 /**
  *
@@ -15,12 +16,16 @@ public class PasswordManagerImplJasypt implements PasswordManager {
 
     @Override
     public String encrypt(String plain) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
+        String encryptedPassword = strongPasswordEncryptor.encryptPassword(plain);
+        return encryptedPassword;
     }
 
     @Override
     public boolean check(String plain, String encrypt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
+        boolean checked = strongPasswordEncryptor.checkPassword(plain, encrypt);
+        return checked;
     }
     
 }
