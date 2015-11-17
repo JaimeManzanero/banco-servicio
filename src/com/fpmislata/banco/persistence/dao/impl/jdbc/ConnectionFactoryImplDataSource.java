@@ -9,6 +9,7 @@ import java.sql.Connection;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -16,14 +17,15 @@ import javax.sql.DataSource;
  */
 public class ConnectionFactoryImplDataSource implements ConnectionFactory {
 
+    @Autowired
+    DataSourceFactory dataSourceFactory;
+    
     @Override
     public Connection getConnection() {
         Connection connection;
         
         try {
-            InitialContext initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            DataSource dataSource = (DataSource) envCtx.lookup("jdbc/banco");
+            DataSource dataSource = dataSourceFactory.getDataSource();
             connection = dataSource.getConnection();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
