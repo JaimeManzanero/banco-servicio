@@ -15,16 +15,16 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 public class PasswordManagerImplJasypt implements PasswordManager {
 
     @Override
-    public String encrypt(String plain) {
+    public String encrypt(String password) {
         StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
-        String encryptedPassword = strongPasswordEncryptor.encryptPassword(plain);
+        String encryptedPassword = strongPasswordEncryptor.encryptPassword(password);
         return encryptedPassword;
     }
 
     @Override
-    public boolean check(String plain, String encrypt) {
+    public boolean check(String password, String encryptedPassword) {
         StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
-        boolean checked = strongPasswordEncryptor.checkPassword(plain, encrypt);
+        boolean checked = strongPasswordEncryptor.checkPassword(password, encryptedPassword);
         return checked;
     }
     

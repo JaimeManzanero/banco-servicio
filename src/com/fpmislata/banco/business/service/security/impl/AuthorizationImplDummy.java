@@ -12,11 +12,18 @@ import com.fpmislata.banco.business.service.security.Authorization;
  *
  * @author alumno
  */
-public class AuthorizationImplDummy implements Authorization{
+public class AuthorizationImplDummy implements Authorization {
 
     @Override
     public boolean isAuthorizedURL(Usuario usuario, String url, String metodo) {
-        return true;
+        boolean success;
+
+        if (url.equals("/banco-api/api/login")) {
+            success = true;
+        } else {
+            success = usuario != null;
+        }
+        return success;
     }
-    
+
 }

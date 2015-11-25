@@ -10,6 +10,6 @@ package com.fpmislata.banco.business.service.security;
  * @author alumno
  */
 public interface PasswordManager {
-    String encrypt(String plain);
-    boolean check(String plain, String encrypt);
+    String encrypt(String password);
+    boolean check(String password, String encryptedPassword);
 }
